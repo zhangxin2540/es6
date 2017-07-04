@@ -25,9 +25,11 @@ const args = yargs
 
     .option('port',{//服务器端口
         string:true,
-        default:80,
+        default:8080,
         describe:'server port'
     })
 
     .argv
-    //对输入的命令行，内容以字符串进行解析
+
+    export default args;
+        //对输入的命令行，内容以字符串进行解析
