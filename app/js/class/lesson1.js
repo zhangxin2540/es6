@@ -12,5 +12,4 @@ function last(){
     k.b=3;
     console.log(PI,k);
 }
-
 last();
