@@ -49,9 +49,33 @@
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(2);
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 	"use strict";
+
+	function test() {
+	    var a = 33;
+	    console.log(a);
+	}
+	test();
+
+	function last() {
+	    var PI = 8;
+	    var k = {
+	        a: 1
+	    };
+	    k.b = 3;
+	    console.log(PI, k);
+	}
+	last();
 
 /***/ })
 /******/ ]);
