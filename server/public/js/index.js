@@ -8705,6 +8705,8 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	{
 	    var _a = 'zz';
 	    var obj = {
@@ -8718,7 +8720,7 @@
 	    };
 	    var s = obj.hello();
 	    console.log('s', s);
-	    //代理
+	    //代理弊端
 	    var monitor = new Proxy(obj, {
 	        //拦截对象属性的读取
 	        get: function get(target, key) {
@@ -8748,15 +8750,15 @@
 	            });
 	        }
 	    });
-	    console.log('get', monitor.name);
+	    //console.log('get',monitor.name);
 	    monitor.name = '张欣';
 	    monitor._r = 45;
-	    console.log('get', monitor._r);
-	    console.log('set', monitor);
-	    console.log('has', 'name' in monitor, 'time' in monitor);
+	    //console.log('get',monitor._r);
+	    //console.log('set',monitor);
+	    //console.log('has','name' in monitor,'time' in monitor);
 	    /*delete monitor._r;
 	    console.log('delete',monitor);*/
-	    console.log('keys', Object.keys(monitor));
+	    //console.log('keys',Object.keys(monitor));
 
 	    var _iteratorNormalCompletion = true;
 	    var _didIteratorError = false;
@@ -8795,10 +8797,61 @@
 	            return a;
 	        }
 	    };
-	    console.log('Reflect get', Reflect.get(_obj, 'time'));
+	    // console.log('Reflect get',Reflect.get(obj,'time')); 
 	    Reflect.set(_obj, 'name', 'zhangxin');
-	    console.log(_obj);
-	    console.log('has', Reflect.has(_obj, 'name'));
+	    // console.log(obj);
+	    //console.log('has',Reflect.has(obj,'name'));
+	}
+
+	{
+	    var validator = function validator(target, _validator) {
+	        return new Proxy(target, {
+	            _validator: _validator,
+	            set: function set(target, key, value, proxy) {
+	                if (target.hasOwnProperty(key)) {
+	                    //hasOwnProperty：检查实例有没有某属性
+	                    var va = this._validator[key];
+	                    if (!!va(value)) {
+	                        return Reflect.set(target, key, value, proxy);
+	                    } else {
+	                        throw Error('\u4E0D\u80FD\u8BBE\u7F6E' + key + '\u5230' + value);
+	                    }
+	                } else {
+	                    throw Error(key + '\u4E0D\u5B58\u5728');
+	                }
+	            }
+	        });
+	    };
+
+	    ;
+	    var personValidators = {
+	        name: function name(val) {
+	            return typeof val === 'string';
+	        },
+	        age: function age(val) {
+	            return !isNaN(val) && val > 18;
+	        },
+	        tel: function tel(val) {
+	            var reg = /^1[3|4|5|6|7|8]\d{9}$/g;
+	            return reg.test(val);
+	        }
+	    };
+
+	    var Person = function Person(name, age, tel) {
+	        _classCallCheck(this, Person);
+
+	        this.name = name;
+	        this.age = age;
+	        this.tel = tel;
+	        return validator(this, personValidators);
+	    };
+
+	    ;
+	    var person = new Person();
+	    person.name = 'zhangxin';
+	    person.age = 19;
+	    person.tel = 15345623584;
+	    console.log(person);
 	}
 
 /***/ })
