@@ -8699,159 +8699,569 @@
 
 /***/ }),
 /* 299 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
+	//Generator 异步编程的解决方案
 	{
-	    var _a = 'zz';
-	    var obj = {
-	        a: _a,
-	        time: '2017-03-11',
-	        name: 'net',
-	        _r: 123,
-	        hello: function hello() {
-	            return _a;
-	        }
-	    };
-	    var s = obj.hello();
-	    console.log('s', s);
-	    //代理弊端
-	    var monitor = new Proxy(obj, {
-	        //拦截对象属性的读取
-	        get: function get(target, key) {
-	            return key === '_r' ? target[key] : null;
-	        },
+	    //generator基本定义
+	    var tell = regeneratorRuntime.mark(function tell() {
+	        return regeneratorRuntime.wrap(function tell$(_context) {
+	            while (1) {
+	                switch (_context.prev = _context.next) {
+	                    case 0:
+	                        console.log('zz');
+	                        _context.next = 3;
+	                        return 'a';
 
-	        //拦截对象设置属性
-	        set: function set(target, key, value) {
-	            return key === 'name' ? target[key] = value : target[key];
-	        },
+	                    case 3:
+	                        _context.next = 5;
+	                        return 'b';
 
-	        //判断一个对象中是否拥有某个属性
-	        //拦截key in object操作
-	        has: function has(target, key) {
-	            return key === 'name' ? target[key] : false;
-	        },
+	                    case 5:
+	                        return _context.abrupt('return', 'c');
 
-	        //拦截delete
-	        deleteProperty: function deleteProperty(target, key) {
-	            return key.startsWith('_') ? delete target[key] : void 0;
-	        },
-
-	        //拦截object.keys,object.getOwnPropertySymbol,object.getOwnPropertyName
-	        ownKeys: function ownKeys(target) {
-	            return Object.keys(target).filter(function (item) {
-	                return item != 'a';
-	            });
-	        }
+	                    case 6:
+	                    case 'end':
+	                        return _context.stop();
+	                }
+	            }
+	        }, tell, this);
 	    });
-	    //console.log('get',monitor.name);
-	    monitor.name = '张欣';
-	    monitor._r = 45;
-	    //console.log('get',monitor._r);
-	    //console.log('set',monitor);
-	    //console.log('has','name' in monitor,'time' in monitor);
-	    /*delete monitor._r;
-	    console.log('delete',monitor);*/
-	    //console.log('keys',Object.keys(monitor));
+	    var k = tell(); //第一次执行 函数里面的东西 zz
+	    console.log(k.next()); //第二次执行 next yield 'a'里的东西
+	    console.log(k.next()); //第三次执行 next yield 'b'里的东西
+	    console.log(k.next());
+	    console.log(k.next());
+	}
+	//Iterator和Generator的结合
+	{
+	    var obj = {
+	        name: 'zx',
+	        age: 16,
+	        city: '北京、上海、广州、天津、武汉、沈阳、哈尔滨、西安、南京、成都、重庆、深圳、杭州、青岛、苏州、太原、郑州、济南、长春、 合肥、长沙、南昌、无锡、昆明、宁波、福州、石家庄'
+	    };
+	    obj[Symbol.iterator] = regeneratorRuntime.mark(function _callee() {
+	        var self, str, strArr, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, value;
 
-	    var _iteratorNormalCompletion = true;
-	    var _didIteratorError = false;
-	    var _iteratorError = undefined;
+	        return regeneratorRuntime.wrap(function _callee$(_context2) {
+	            while (1) {
+	                switch (_context2.prev = _context2.next) {
+	                    case 0:
+	                        self = this;
+	                        str = self.city;
+	                        strArr = str.split('、');
+	                        _iteratorNormalCompletion = true;
+	                        _didIteratorError = false;
+	                        _iteratorError = undefined;
+	                        _context2.prev = 6;
+	                        _iterator = strArr[Symbol.iterator]();
+
+	                    case 8:
+	                        if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+	                            _context2.next = 15;
+	                            break;
+	                        }
+
+	                        value = _step.value;
+	                        _context2.next = 12;
+	                        return value;
+
+	                    case 12:
+	                        _iteratorNormalCompletion = true;
+	                        _context2.next = 8;
+	                        break;
+
+	                    case 15:
+	                        _context2.next = 21;
+	                        break;
+
+	                    case 17:
+	                        _context2.prev = 17;
+	                        _context2.t0 = _context2['catch'](6);
+	                        _didIteratorError = true;
+	                        _iteratorError = _context2.t0;
+
+	                    case 21:
+	                        _context2.prev = 21;
+	                        _context2.prev = 22;
+
+	                        if (!_iteratorNormalCompletion && _iterator.return) {
+	                            _iterator.return();
+	                        }
+
+	                    case 24:
+	                        _context2.prev = 24;
+
+	                        if (!_didIteratorError) {
+	                            _context2.next = 27;
+	                            break;
+	                        }
+
+	                        throw _iteratorError;
+
+	                    case 27:
+	                        return _context2.finish(24);
+
+	                    case 28:
+	                        return _context2.finish(21);
+
+	                    case 29:
+	                    case 'end':
+	                        return _context2.stop();
+	                }
+	            }
+	        }, _callee, this, [[6, 17, 21, 29], [22,, 24, 28]]);
+	    });
+	    var _iteratorNormalCompletion2 = true;
+	    var _didIteratorError2 = false;
+	    var _iteratorError2 = undefined;
 
 	    try {
-	        for (var _iterator = Object.entries(monitor)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	            var _step$value = _slicedToArray(_step.value, 2),
-	                key = _step$value[0],
-	                value = _step$value[1];
+	        for (var _iterator2 = obj[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	            var value = _step2.value;
 
-	            console.log('key:', key, 'value:', value);
+	            console.log(value);
 	        }
 	    } catch (err) {
-	        _didIteratorError = true;
-	        _iteratorError = err;
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
 	    } finally {
 	        try {
-	            if (!_iteratorNormalCompletion && _iterator.return) {
-	                _iterator.return();
+	            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	                _iterator2.return();
 	            }
 	        } finally {
-	            if (_didIteratorError) {
-	                throw _iteratorError;
+	            if (_didIteratorError2) {
+	                throw _iteratorError2;
 	            }
 	        }
 	    }
 	}
 
 	{
-	    var _obj = {
-	        time: '2017-03-11',
-	        name: 'net',
-	        _r: 123,
-	        hello: function hello() {
-	            return a;
+	    var _obj = {};
+	    _obj[Symbol.iterator] = regeneratorRuntime.mark(function _callee2() {
+	        return regeneratorRuntime.wrap(function _callee2$(_context3) {
+	            while (1) {
+	                switch (_context3.prev = _context3.next) {
+	                    case 0:
+	                        _context3.next = 2;
+	                        return 1;
+
+	                    case 2:
+	                        _context3.next = 4;
+	                        return 2;
+
+	                    case 4:
+	                        _context3.next = 6;
+	                        return 3;
+
+	                    case 6:
+	                    case 'end':
+	                        return _context3.stop();
+	                }
+	            }
+	        }, _callee2, this);
+	    });
+	    var _iteratorNormalCompletion3 = true;
+	    var _didIteratorError3 = false;
+	    var _iteratorError3 = undefined;
+
+	    try {
+	        for (var _iterator3 = _obj[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	            var _value = _step3.value;
+
+	            console.log('value', _value);
 	        }
-	    };
-	    // console.log('Reflect get',Reflect.get(obj,'time')); 
-	    Reflect.set(_obj, 'name', 'zhangxin');
-	    // console.log(obj);
-	    //console.log('has',Reflect.has(obj,'name'));
+	    } catch (err) {
+	        _didIteratorError3 = true;
+	        _iteratorError3 = err;
+	    } finally {
+	        try {
+	            if (!_iteratorNormalCompletion3 && _iterator3.return) {
+	                _iterator3.return();
+	            }
+	        } finally {
+	            if (_didIteratorError3) {
+	                throw _iteratorError3;
+	            }
+	        }
+	    }
+	}
+	//状态机，循环3个状态
+	{
+	    var state = regeneratorRuntime.mark(function state() {
+	        return regeneratorRuntime.wrap(function state$(_context4) {
+	            while (1) {
+	                switch (_context4.prev = _context4.next) {
+	                    case 0:
+	                        console.log('zzzzzzzz');
+
+	                    case 1:
+	                        if (false) {
+	                            _context4.next = 10;
+	                            break;
+	                        }
+
+	                        _context4.next = 4;
+	                        return 1;
+
+	                    case 4:
+	                        _context4.next = 6;
+	                        return 2;
+
+	                    case 6:
+	                        _context4.next = 8;
+	                        return 3;
+
+	                    case 8:
+	                        _context4.next = 1;
+	                        break;
+
+	                    case 10:
+	                    case 'end':
+	                        return _context4.stop();
+	                }
+	            }
+	        }, state, this);
+	    });
+	    var states = state();
+	    console.log(states.next());
+	    console.log(states.next());
+	    console.log(states.next());
+	    console.log(states.next());
+	    console.log(states.next());
 	}
 
+	//抽奖
 	{
-	    var validator = function validator(target, _validator) {
-	        return new Proxy(target, {
-	            _validator: _validator,
-	            set: function set(target, key, value, proxy) {
-	                if (target.hasOwnProperty(key)) {
-	                    //hasOwnProperty：检查实例有没有某属性
-	                    var va = this._validator[key];
-	                    if (!!va(value)) {
-	                        return Reflect.set(target, key, value, proxy);
-	                    } else {
-	                        throw Error('\u4E0D\u80FD\u8BBE\u7F6E' + key + '\u5230' + value);
-	                    }
-	                } else {
-	                    throw Error(key + '\u4E0D\u5B58\u5728');
+	    var draw = function draw(count) {
+	        console.log('\u5269\u4F59' + count + '\u6B21');
+	    };
+	    var residue = regeneratorRuntime.mark(function residue(count) {
+	        return regeneratorRuntime.wrap(function residue$(_context5) {
+	            while (1) {
+	                switch (_context5.prev = _context5.next) {
+	                    case 0:
+	                        if (!(count > 0)) {
+	                            _context5.next = 6;
+	                            break;
+	                        }
+
+	                        count--;
+	                        _context5.next = 4;
+	                        return draw(count);
+
+	                    case 4:
+	                        _context5.next = 0;
+	                        break;
+
+	                    case 6:
+	                    case 'end':
+	                        return _context5.stop();
 	                }
+	            }
+	        }, residue, this);
+	    });
+
+	    var star = residue(5);
+
+	    var btn = document.createElement('button');
+	    btn.textContent = '抽奖';
+	    btn.id = 'start';
+	    document.body.appendChild(btn);
+	    document.getElementById('start').addEventListener('click', function () {
+	        star.next();
+	    });
+	}
+
+	//长轮询
+	{
+	    var ajax = regeneratorRuntime.mark(function ajax() {
+	        return regeneratorRuntime.wrap(function ajax$(_context6) {
+	            while (1) {
+	                switch (_context6.prev = _context6.next) {
+	                    case 0:
+	                        _context6.next = 2;
+	                        return new Promise(function (resolve, reject) {
+	                            setTimeout(function () {
+	                                resolve({ code: 0 });
+	                            }, 200);
+	                        });
+
+	                    case 2:
+	                    case 'end':
+	                        return _context6.stop();
+	                }
+	            }
+	        }, ajax, this);
+	    });
+
+	    var pull = function pull() {
+	        var generator = ajax();
+	        var step = generator.next();
+	        step.value.then(function (d) {
+	            if (d.code != 0) {
+	                setTimeout(function () {
+	                    console.log('wait');
+	                    pull();
+	                }, 1000);
+	            } else {
+	                console.log(d);
 	            }
 	        });
 	    };
+	    pull();
+	}
+	//Generator 异步编程解决方案
+	{
+	    //定义一个generator
+	    var test = regeneratorRuntime.mark(function test() {
+	        return regeneratorRuntime.wrap(function test$(_context7) {
+	            while (1) {
+	                switch (_context7.prev = _context7.next) {
+	                    case 0:
+	                        _context7.next = 2;
+	                        return 'a';
 
-	    ;
-	    var personValidators = {
-	        name: function name(val) {
-	            return typeof val === 'string';
-	        },
-	        age: function age(val) {
-	            return !isNaN(val) && val > 18;
-	        },
-	        tel: function tel(val) {
-	            var reg = /^1[3|4|5|6|7|8]\d{9}$/g;
-	            return reg.test(val);
+	                    case 2:
+	                        _context7.next = 4;
+	                        return 'b';
+
+	                    case 4:
+	                    case 'end':
+	                        return _context7.stop();
+	                }
+	            }
+	        }, test, this);
+	    });
+	    var initializeTest = test();
+	    console.log('定义一个generator1', initializeTest.next());
+	    console.log('定义一个generator2', initializeTest.next());
+	    console.log('定义一个generator3', initializeTest.next());
+	}
+	{
+	    //Iterator和Generator的结合
+	    var _obj2 = _defineProperty({
+	        ary: [2, 6, 5, 4]
+	    }, Symbol.iterator, regeneratorRuntime.mark(function _callee3() {
+	        var self, strArr, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _value2;
+
+	        return regeneratorRuntime.wrap(function _callee3$(_context8) {
+	            while (1) {
+	                switch (_context8.prev = _context8.next) {
+	                    case 0:
+	                        self = this;
+	                        strArr = self.ary;
+	                        _iteratorNormalCompletion4 = true;
+	                        _didIteratorError4 = false;
+	                        _iteratorError4 = undefined;
+	                        _context8.prev = 5;
+	                        _iterator4 = strArr[Symbol.iterator]();
+
+	                    case 7:
+	                        if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
+	                            _context8.next = 14;
+	                            break;
+	                        }
+
+	                        _value2 = _step4.value;
+	                        _context8.next = 11;
+	                        return _value2;
+
+	                    case 11:
+	                        _iteratorNormalCompletion4 = true;
+	                        _context8.next = 7;
+	                        break;
+
+	                    case 14:
+	                        _context8.next = 20;
+	                        break;
+
+	                    case 16:
+	                        _context8.prev = 16;
+	                        _context8.t0 = _context8['catch'](5);
+	                        _didIteratorError4 = true;
+	                        _iteratorError4 = _context8.t0;
+
+	                    case 20:
+	                        _context8.prev = 20;
+	                        _context8.prev = 21;
+
+	                        if (!_iteratorNormalCompletion4 && _iterator4.return) {
+	                            _iterator4.return();
+	                        }
+
+	                    case 23:
+	                        _context8.prev = 23;
+
+	                        if (!_didIteratorError4) {
+	                            _context8.next = 26;
+	                            break;
+	                        }
+
+	                        throw _iteratorError4;
+
+	                    case 26:
+	                        return _context8.finish(23);
+
+	                    case 27:
+	                        return _context8.finish(20);
+
+	                    case 28:
+	                    case 'end':
+	                        return _context8.stop();
+	                }
+	            }
+	        }, _callee3, this, [[5, 16, 20, 28], [21,, 23, 27]]);
+	    }));
+	    var _iteratorNormalCompletion5 = true;
+	    var _didIteratorError5 = false;
+	    var _iteratorError5 = undefined;
+
+	    try {
+	        for (var _iterator5 = _obj2[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+	            var _value3 = _step5.value;
+
+	            console.log('和iterator结合', _value3);
 	        }
+	    } catch (err) {
+	        _didIteratorError5 = true;
+	        _iteratorError5 = err;
+	    } finally {
+	        try {
+	            if (!_iteratorNormalCompletion5 && _iterator5.return) {
+	                _iterator5.return();
+	            }
+	        } finally {
+	            if (_didIteratorError5) {
+	                throw _iteratorError5;
+	            }
+	        }
+	    }
+	}
+
+	{
+	    //状态机
+	    var status = regeneratorRuntime.mark(function status() {
+	        return regeneratorRuntime.wrap(function status$(_context9) {
+	            while (1) {
+	                switch (_context9.prev = _context9.next) {
+	                    case 0:
+	                        if (false) {
+	                            _context9.next = 9;
+	                            break;
+	                        }
+
+	                        _context9.next = 3;
+	                        return 'a1';
+
+	                    case 3:
+	                        _context9.next = 5;
+	                        return 'a2';
+
+	                    case 5:
+	                        _context9.next = 7;
+	                        return 'a3';
+
+	                    case 7:
+	                        _context9.next = 0;
+	                        break;
+
+	                    case 9:
+	                    case 'end':
+	                        return _context9.stop();
+	                }
+	            }
+	        }, status, this);
+	    });
+	    var initializeStatus = status();
+	    console.log(initializeStatus.next());
+	    console.log(initializeStatus.next());
+	    console.log(initializeStatus.next());
+	    console.log(initializeStatus.next());
+	}
+	{
+	    //抽奖
+	    var _draw = function _draw(count) {
+	        console.log('\u5269\u4F59' + count + '\u6B21\u62BD\u5956\u673A\u4F1A');
 	    };
 
-	    var Person = function Person(name, age, tel) {
-	        _classCallCheck(this, Person);
+	    var overTimes = regeneratorRuntime.mark(function overTimes(count) {
+	        return regeneratorRuntime.wrap(function overTimes$(_context10) {
+	            while (1) {
+	                switch (_context10.prev = _context10.next) {
+	                    case 0:
+	                        if (!(count > 0)) {
+	                            _context10.next = 6;
+	                            break;
+	                        }
 
-	        this.name = name;
-	        this.age = age;
-	        this.tel = tel;
-	        return validator(this, personValidators);
+	                        count--;
+	                        _context10.next = 4;
+	                        return _draw(count);
+
+	                    case 4:
+	                        _context10.next = 0;
+	                        break;
+
+	                    case 6:
+	                    case 'end':
+	                        return _context10.stop();
+	                }
+	            }
+	        }, overTimes, this);
+	    });
+	    var initializeTimes = overTimes(5);
+	    var button = document.createElement('button');
+	    button.id = 'btn';
+	    button.textContent = '按钮';
+	    document.body.appendChild(button);
+	    var _btn = document.getElementById('btn');
+	    _btn.addEventListener('click', function () {
+	        initializeTimes.next();
+	    }, false);
+	}
+	{
+	    //长轮询：通过定时器不断的去访问某一数据接口
+	    var _ajax = regeneratorRuntime.mark(function _ajax() {
+	        return regeneratorRuntime.wrap(function _ajax$(_context11) {
+	            while (1) {
+	                switch (_context11.prev = _context11.next) {
+	                    case 0:
+	                        _context11.next = 2;
+	                        return new Promise(function (resolve, reject) {
+	                            setTimeout(function () {
+	                                resolve({ code: 0 });
+	                            }, 200);
+	                        });
+
+	                    case 2:
+	                    case 'end':
+	                        return _context11.stop();
+	                }
+	            }
+	        }, _ajax, this);
+	    });
+	    var _pull = function _pull() {
+	        var initializePull = _ajax();
+	        var nextAjax = initializePull.next();
+	        nextAjax.value.then(function (d) {
+	            if (d.code != 0) {
+	                setTimeout(function () {
+	                    console.log('wait');
+	                    _pull();
+	                }, 1000);
+	            } else {
+	                console.log('成功');
+	            }
+	        });
 	    };
-
-	    ;
-	    var person = new Person();
-	    person.name = 'zhangxin';
-	    person.age = 19;
-	    person.tel = 15345623584;
-	    console.log(person);
+	    _pull();
 	}
 
 /***/ })

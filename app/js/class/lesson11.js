@@ -19,7 +19,7 @@
         },
         //拦截对象设置属性
         set(target,key,value){
-            return key==='name'?target[key]=value:target[key];
+            return key==='name'?Reflect.set(obj,'name',value):target[key];
         },
         //判断一个对象中是否拥有某个属性
         //拦截key in object操作
@@ -46,7 +46,7 @@
     //console.log('keys',Object.keys(monitor));
 
     for(let [key,value] of Object.entries(monitor)){
-        console.log('key:',key,'value:',value);
+        //console.log('key:',key,'value:',value);
     }
 }
 
@@ -111,3 +111,4 @@
     console.log(person);
 
 }
+
