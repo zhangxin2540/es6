@@ -2,7 +2,7 @@
 //import './class/lesson1'; let const
 //import './class/lesson2';  解构赋值
 //import './class/lesson3';  正则扩展
-//import 'babel-polyfill';
+import 'babel-polyfill';
 //import './class/lesson4';
 //import './class/lesson5';
 //import './class/lesson6';
@@ -28,6 +28,8 @@ console.log(lesson.test);
 console.log(lesson.Hello);*/
 
 //3.引入方式
-import lesson17 from './class/lesson17';
-console.log(lesson17);
+//import lesson17 from './class/lesson17';
+//console.log(lesson17);
+
+//import lottery from './lottery';
 
