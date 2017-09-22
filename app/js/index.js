@@ -31,5 +31,5 @@ console.log(lesson.Hello);*/
 //import lesson17 from './class/lesson17';
 //console.log(lesson17);
 
-//import lottery from './lottery';
+import lottery from './lottery';
 
